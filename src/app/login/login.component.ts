@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../shared/services/auth.service';
 import { CustomValidationService } from '../shared/custom-validation.service';
 import { first } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private customValidator: CustomValidationService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _snackBar: MatSnackBar
   ) {
     if (this.authService.getCurrentUser) {
       this.router.navigate(['/']);
@@ -58,10 +60,16 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         (data) => {
+          console.log(data);
           this.router.navigate([this.returnUrl]);
         },
         (error) => {
           this.isLoading = false;
+          this._snackBar.open('Please Register', 'Failed', {
+            duration: 2000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+          });
         }
       );
     // this.router.navigateByUrl('');

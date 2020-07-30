@@ -102,7 +102,7 @@ export class RegisterComponent implements OnInit {
         .pipe(first())
         .subscribe((data) => {
           this._snackBar.open('Saved Successful', 'Success', {
-            duration: 1000,
+            duration: 2000,
             horizontalPosition: 'right',
             verticalPosition: 'top',
           });
@@ -115,7 +115,7 @@ export class RegisterComponent implements OnInit {
         .pipe(first())
         .subscribe((data) => {
           this._snackBar.open('Registration Successful', 'Success', {
-            duration: 1000,
+            duration: 2000,
             horizontalPosition: 'right',
             verticalPosition: 'top',
           });
