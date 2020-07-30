@@ -1,1 +1,155 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import "~@angular/material/theming";
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$user-form-primary: mat-palette($mat-indigo);
+$user-form-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$user-form-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$user-form-theme: mat-light-theme(
+  $user-form-primary,
+  $user-form-accent,
+  $user-form-warn
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($user-form-theme);
+
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  // background-image: url(https://lh4.googleusercontent.com/-XplyTa1Za-I/VMSgIyAYkHI/AAAAAAAADxM/oL-rD6VP4ts/w1184-h666/Android-Lollipop-wallpapers-Google-Now-Wallpaper-2.png);
+  // background-image: url(https://www.pngkit.com/png/detail/416-4169392_color-overlay-lilac.png);
+  // background-position: center;
+  // background-size: cover;
+  // background-repeat: no-repeat;
+  // min-height: 100vh;
+}
+
+// html,
+// body {
+//   height: 100%;
+//   margin: 0;
+//   padding: 0;
+// }
+// body {
+//   background-image: url(https://lh4.googleusercontent.com/-XplyTa1Za-I/VMSgIyAYkHI/AAAAAAAADxM/oL-rD6VP4ts/w1184-h666/Android-Lollipop-wallpapers-Google-Now-Wallpaper-2.png);
+//   background-position: center;
+//   background-size: cover;
+//   background-repeat: no-repeat;
+//   min-height: 100vh;
+//   font-family: "Roboto", sans-serif;
+// }
+
+// .app-header {
+//   justify-content: space-between;
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   z-index: 2;
+//   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+//     0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+// }
+.login-wrapper {
+  //   height: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 60px 0;
+}
+// .positronx {
+//   text-decoration: none;
+//   color: #ffffff;
+// }
+.box {
+  position: relative;
+  top: 0;
+  opacity: 1;
+  float: left;
+  padding: 60px 50px 40px 50px;
+  width: 100%;
+  background: #fff;
+  border-radius: 10px;
+  transform: scale(1);
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  z-index: 5;
+  max-width: 330px;
+}
+// .box.back {
+//   transform: scale(0.95);
+//   -webkit-transform: scale(0.95);
+//   -ms-transform: scale(0.95);
+//   top: -20px;
+//   opacity: 0.8;
+//   z-index: -1;
+// }
+// .box:before {
+//   content: "";
+//   width: 100%;
+//   height: 30px;
+//   border-radius: 10px;
+//   position: absolute;
+//   top: -10px;
+//   background: rgba(255, 255, 255, 0.6);
+//   left: 0;
+//   transform: scale(0.95);
+//   -webkit-transform: scale(0.95);
+//   -ms-transform: scale(0.95);
+//   z-index: -1;
+// }
+.login-wrapper .example-form {
+  min-width: 100%;
+  max-width: 300px;
+  width: 100%;
+}
+.login-wrapper .example-full-width,
+.login-wrapper .btn-block {
+  width: 100%;
+}
+.login-wrapper mat-card-header {
+  text-align: center;
+  width: 100%;
+  display: block;
+  font-weight: 700;
+}
+.login-wrapper mat-card-header mat-card-title {
+  font-size: 30px;
+  margin: 0;
+}
+.login-wrapper .mat-card {
+  padding: 40px 70px 50px;
+}
+.login-wrapper .mat-stroked-button {
+  border: 1px solid currentColor;
+  line-height: 54px;
+  background: #fff7fa;
+}
+.login-wrapper .mat-form-field-appearance-legacy .mat-form-field-infix {
+  padding: 0.8375em 0;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

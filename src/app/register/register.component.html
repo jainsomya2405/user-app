@@ -1,0 +1,121 @@
+<div class="login-wrapper">
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title>Register</mat-card-title>
+    </mat-card-header>
+
+    <form
+      class="example-form"
+      [formGroup]="registerForm"
+      (ngSubmit)="register()"
+    >
+      <mat-card-content>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Username" formControlName="name" />
+        </mat-form-field>
+
+        <div *ngIf="formControls.name.dirty || formControls.name.touched">
+          <small *ngIf="formControls.name.errors?.required" class="help-block">
+            Name is required.
+          </small>
+          <small *ngIf="formControls.name.errors?.minlength" class="help-block">
+            Name must be at least 4 characters long.
+          </small>
+        </div>
+
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Email" formControlName="email" />
+        </mat-form-field>
+
+        <div *ngIf="formControls.email.touched || formControls.email.dirty">
+          <small *ngIf="formControls.email.errors?.required" class="help-block"
+            >email is required</small
+          >
+          <small *ngIf="formControls.email.errors?.pattern" class="help-block"
+            >Please provide a valid email address</small
+          >
+        </div>
+
+        <mat-form-field class="example-full-width">
+          <input
+            matInput
+            placeholder="Password"
+            formControlName="password"
+            [type]="hidePassword ? 'password' : 'text'"
+          />
+          <mat-icon matSuffix (click)="hidePassword = !hidePassword">
+            {{ hidePassword ? "visibility" : "visibility_off" }}
+          </mat-icon>
+        </mat-form-field>
+
+        <div
+          *ngIf="
+            formControls.password.touched &&
+            formControls.password.errors?.required
+          "
+        >
+          <small class="help-block">Password is required</small>
+        </div>
+        <div
+          *ngIf="
+            formControls.password.touched &&
+            formControls.password.errors?.invalidPassword
+          "
+        >
+          <small class="help-block"
+            >Password should have minimum 8 characters, at least 1 uppercase
+            letter, 1 lowercase letter and 1 number</small
+          >
+        </div>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Country</mat-label>
+          <mat-select formControlName="country">
+            <mat-option [value]="country" *ngFor="let country of countryList">{{
+              country
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>State</mat-label>
+          <mat-select formControlName="state">
+            <mat-option [value]="list" *ngFor="let list of stateList">{{
+              list
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-radio-group class="example-full-width" formControlName="gender">
+          <mat-radio-button
+            *ngFor="let gender of genderList"
+            [value]="gender"
+            >{{ gender }}</mat-radio-button
+          >
+        </mat-radio-group>
+      </mat-card-content>
+
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        "
+      >
+        <button
+          mat-stroked-button
+          color="accent"
+          class="btn-block"
+          type="submit"
+          [disabled]="registerForm.invalid"
+        >
+          Register
+        </button>
+
+        <button mat-stroked-button color="accent" class="btn-block">
+          <a routerLink="/login">Cancel</a>
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>

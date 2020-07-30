@@ -1,0 +1,94 @@
+<div class="login-wrapper">
+  <mat-progress-spinner
+    mode="determinate"
+    value="66"
+    diameter="45"
+    *ngIf="isLoading"
+  ></mat-progress-spinner>
+  <mat-card class="box" *ngIf="!isLoading">
+    <mat-card-header>
+      <mat-card-title>Log in</mat-card-title>
+    </mat-card-header>
+
+    <form class="example-form" [formGroup]="loginDetails" (ngSubmit)="login()">
+      <mat-card-content>
+        <mat-form-field class="example-full-width">
+          <input
+            matInput
+            type="email"
+            placeholder="Email ID"
+            formControlName="email"
+          />
+        </mat-form-field>
+
+        <!-- <mat-error *ngIf="formControls.email.errors?.required">email is required</mat-error>
+        <mat-error *ngIf="formControls.email.errors?.pattern">Please provide a valid email address</mat-error> -->
+        <div
+          *ngIf="
+            (formControls.email && formControls.email.touched) ||
+            formControls.email.dirty
+          "
+        >
+          <small *ngIf="formControls.email.errors?.required" class="help-block"
+            >email is required</small
+          >
+          <small *ngIf="formControls.email.errors?.pattern" class="help-block"
+            >Please provide a valid email address</small
+          >
+        </div>
+
+        <mat-form-field class="example-full-width">
+          <input
+            matInput
+            type="password"
+            placeholder="Password"
+            formControlName="password"
+            [type]="hidePassword ? 'password' : 'text'"
+          />
+          <mat-icon matSuffix (click)="hidePassword = !hidePassword">
+            {{ hidePassword ? "visibility" : "visibility_off" }}
+          </mat-icon>
+        </mat-form-field>
+        <div
+          *ngIf="
+            formControls.password.touched &&
+            formControls.password.errors?.required
+          "
+        >
+          <small class="help-block">Password is required</small>
+        </div>
+        <div
+          *ngIf="
+            formControls.password.touched &&
+            formControls.password.errors?.invalidPassword
+          "
+        >
+          <small class="help-block"
+            >Password should have minimum 8 characters, at least 1 uppercase
+            letter, 1 lowercase letter and 1 number</small
+          >
+        </div>
+      </mat-card-content>
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        "
+      >
+        <button
+          mat-stroked-button
+          color="accent"
+          class="btn-block"
+          type="submit"
+          [disabled]="loginDetails.invalid"
+        >
+          Log in
+        </button>
+        <button mat-stroked-button color="accent" class="btn-block">
+          <a routerLink="/register" class="btn btn-link">Register</a>
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>
