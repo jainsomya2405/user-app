@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
         },
         (error) => {
           this.isLoading = false;
-          this._snackBar.open('Please Register', 'Failed', {
+          this._snackBar.open(error, 'Failed', {
             duration: 2000,
             horizontalPosition: 'right',
             verticalPosition: 'top',
