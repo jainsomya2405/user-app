@@ -1,11 +1,10 @@
-<!-- Toolbar -->
-<mat-toolbar color="primary" class="app-header"  *ngIf="currentUser">
-  <div>User Form</div>
-  <span class="nav-tool-items">
-    <a mat-button (click)="logout()">{{ mode ? "LogOut" : 'Login' }}</a>
-    <a mat-button mat-raised-button (click)="register()">{{
+<mat-toolbar class="app-header" *ngIf="currentUser">
+  <div class="white-text">User Form</div>
+  <span class="nav-tool-items white-text">
+    <a mat-button (click)="logout()">Logout</a>
+    <!-- <a mat-button mat-raised-button (click)="register()">{{
       mode ? "Edit Profile" : "Register"
-    }}</a>
+    }}</a> -->
   </span>
 </mat-toolbar>
 

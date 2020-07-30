@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RegisterModel } from '../shared/models/register.model';
 import { AuthService } from '../shared/services/auth.service';
 import { UserService } from '../shared/services/user.service';
-import { first } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-details',
@@ -15,19 +15,30 @@ export class UserDetailsComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {
-    this.currentUser = this.authService.getCurrentUser;
+    this.authService.currentUser.subscribe((x) => (this.currentUser = x));
   }
 
   ngOnInit(): void {
-    this.usersList();
+    // this.userService
+    //   .getAll()
+    //   .pipe()
+    //   .subscribe(
+    //     (users) => {
+    //       this.users = users;
+    //       console.log(this.users);
+    //     },
+    //     (error) => {
+    //       console.log(error);
+    //     }
+    //   );
   }
 
-  private usersList() {
-    this.userService
-      .getAll()
-      .pipe(first())
-      .subscribe((users) => (this.users = users));
+  edit() {
+    this.router.navigate(['register'], {
+      queryParams: { mode: 'edit' },
+    });
   }
 }

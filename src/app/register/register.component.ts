@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../shared/services/user.service';
 import { first } from 'rxjs/operators';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -48,6 +49,8 @@ export class RegisterComponent implements OnInit {
 
   genderList: string[] = ['Male', 'Female'];
   hidePassword = true;
+  mode;
+  buttonName='Register'
 
   constructor(
     private fb: FormBuilder,
@@ -55,13 +58,15 @@ export class RegisterComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private router: Router,
     private route: ActivatedRoute,
-    private userService: UserService
+    private userService: UserService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
-    let mode = this.route.snapshot.queryParamMap.get('mode');
-    if (mode == 'edit') {
-      this.user = JSON.parse(localStorage.getItem('user'));
+    this.mode = this.route.snapshot.queryParamMap.get('mode');
+    if (this.mode == 'edit') {
+      this.user = this.authService.getCurrentUser;
+      this.buttonName='Save'
     }
     this.registerForm = this.fb.group({
       name: [this.user.name, [Validators.required, Validators.minLength(4)]],
@@ -87,28 +92,35 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    console.log(this.registerForm.value);
     if (this.registerForm.invalid) return;
 
-    this.userService
-      .register(this.registerForm.value)
-      .pipe(first())
-      .subscribe(
-        (data) => {
+    if (this.mode == 'edit') {
+      const object = this.registerForm.value;
+      object.id = this.user.id;
+      this.authService
+        .registerUser(object)
+        .pipe(first())
+        .subscribe((data) => {
+          this._snackBar.open('Saved Successful', 'Success', {
+            duration: 1000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+          });
+
+          this.router.navigate(['']);
+        });
+    } else {
+      this.userService
+        .register(this.registerForm.value)
+        .pipe(first())
+        .subscribe((data) => {
           this._snackBar.open('Registration Successful', 'Success', {
             duration: 1000,
             horizontalPosition: 'right',
             verticalPosition: 'top',
           });
           this.router.navigate(['login']);
-        },
-        (error) => {
-          this._snackBar.open('Registration Failed', 'Failed', {
-            duration: 1000,
-            horizontalPosition: 'right',
-            verticalPosition: 'top',
-          });
-        }
-      );
+        });
+    }
   }
 }

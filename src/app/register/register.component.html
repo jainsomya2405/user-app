@@ -86,35 +86,29 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-radio-group class="example-full-width" formControlName="gender">
-          <mat-radio-button
-            *ngFor="let gender of genderList"
-            [value]="gender"
-            >{{ gender }}</mat-radio-button
-          >
-        </mat-radio-group>
+        <div class="example-full-width">
+          <label class="radio-button">Gender</label>
+          <mat-radio-group formControlName="gender">
+            <mat-radio-button
+              *ngFor="let gender of genderList"
+              [value]="gender"
+              >{{ gender }}</mat-radio-button
+            >
+          </mat-radio-group>
+        </div>
       </mat-card-content>
 
-      <div
-        style="
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        "
-      >
+      <div class="button-row">
         <button
-          mat-stroked-button
-          color="accent"
-          class="btn-block"
+          mat-raised-button
           type="submit"
           [disabled]="registerForm.invalid"
+          class="button-color"
         >
-          Register
+          {{ buttonName }}
         </button>
 
-        <button mat-stroked-button color="basic" class="btn-block">
-          <a routerLink="/login">Cancel</a>
-        </button>
+        <a mat-raised-button routerLink="/login">Cancel</a>
       </div>
     </form>
   </mat-card>

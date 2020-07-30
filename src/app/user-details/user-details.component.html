@@ -1,5 +1,14 @@
-<ul>
-  <li *ngFor="let user of users">
-    {{ user.username }} ({{ user.firstName }} {{ user.lastName }})
-  </li>
-</ul>
+<div class="user-wrapper">
+  <div class="user-box">
+    <mat-card class="card black mockup">
+      <mat-card-content class="white-text">
+        <span class="card-title">User Detail</span>
+        <p>UserName : {{ currentUser.name }}</p>
+        <p>Email : {{ currentUser.email }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button (click)="edit()" class="card-button">Edit Profile</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

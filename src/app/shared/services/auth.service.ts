@@ -30,6 +30,16 @@ export class AuthService {
     );
   }
 
+  registerUser(user) {
+    return this.http.post<any>(`/users/edit`, user).pipe(
+      map((user) => {
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        this.currentUserSubject.next(user);
+        return user;
+      })
+    );
+  }
+
   logout() {
     // remove user from local storage and set current user to null
     localStorage.removeItem('currentUser');

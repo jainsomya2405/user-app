@@ -1,0 +1,71 @@
+.user-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-box {
+  padding: 60px 50px 40px 50px;
+  width: 100%;
+  max-width: 330px;
+}
+
+.mockup {
+  opacity: 0.4;
+  transform: rotate(-1deg);
+}
+
+.black {
+  background-color: #000 !important;
+}
+
+.mockup::before {
+  content: "";
+  display: block;
+  transform: rotate(2deg);
+  width: 100%;
+  height: 100%;
+  background-color: inherit;
+  border-radius: inherit;
+}
+
+.card::before {
+  content: "";
+  transition: 0.3s;
+  opacity: 0.5;
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: inherit;
+  border-radius: inherit;
+  z-index: -1;
+}
+
+.card {
+  transition: transform 0.3s, opacity 0s;
+}
+
+.card .card-title {
+  display: block;
+  line-height: 32px;
+  margin-bottom: 8px;
+  font-size: 24px;
+  font-weight: 300;
+}
+
+.card .mat-card-actions:last-child {
+  border-radius: 0 0 2px 2px;
+}
+.card .mat-card-actions {
+  border-top: 1px solid rgba(160, 160, 160, 0.2);
+}
+
+.card .card-button {
+  color: #ffab40;
+  margin-right: 24px;
+  transition: color 0.3s ease;
+  text-transform: uppercase;
+}

@@ -25,6 +25,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { JwtInterceptor } from './shared/interceptors/jwt.interceptor';
 import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
@@ -38,18 +39,9 @@ import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    MaterialModule,
     ReactiveFormsModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatInputModule,
-    MatTableModule,
-    MatIconModule,
-    MatFormFieldModule,
-    MatCardModule,
-    MatRadioModule,
-    MatSelectModule,
-    MatSnackBarModule,
-    MatProgressSpinnerModule,
+    
   ],
   providers: [
     {
@@ -69,16 +61,7 @@ import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
     },
   ],
   exports: [
-    MatToolbarModule,
-    MatButtonModule,
-    MatInputModule,
-    MatTableModule,
-    MatIconModule,
-    MatFormFieldModule,
-    MatRadioModule,
-    MatSelectModule,
-    MatSnackBarModule,
-    MatProgressSpinnerModule,
+   
   ],
   bootstrap: [AppComponent],
 })

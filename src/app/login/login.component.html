@@ -7,7 +7,7 @@
   ></mat-progress-spinner>
   <mat-card class="box" *ngIf="!isLoading">
     <mat-card-header>
-      <mat-card-title>Log in</mat-card-title>
+      <mat-card-title style="color: #479e47;">User Login</mat-card-title>
     </mat-card-header>
 
     <form class="example-form" [formGroup]="loginDetails" (ngSubmit)="login()">
@@ -69,25 +69,17 @@
           >
         </div>
       </mat-card-content>
-      <div
-        style="
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        "
-      >
+      <div class="button-row">
         <button
-          mat-stroked-button
-          color="accent"
-          class="btn-block"
+          mat-raised-button
           type="submit"
           [disabled]="loginDetails.invalid"
+          class="button-color"
+          style="margin-right: 16px;"
         >
           Log in
         </button>
-        <button mat-stroked-button color="primary" class="btn-block">
-          <a routerLink="/register" class="btn btn-link">Register</a>
-        </button>
+        <a mat-raised-button routerLink="/register">Register</a>
       </div>
     </form>
   </mat-card>

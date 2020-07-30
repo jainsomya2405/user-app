@@ -49,7 +49,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    console.log(this.loginDetails.value);
     if (this.loginDetails.invalid) return;
     this.isLoading = true;
 
