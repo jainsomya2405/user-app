@@ -70,19 +70,46 @@
 
         <mat-form-field class="example-full-width">
           <mat-label>Country</mat-label>
-          <mat-select formControlName="country">
-            <mat-option [value]="country" *ngFor="let country of countryList">{{
-              country
-            }}</mat-option>
+          <mat-select
+            formControlName="country"
+            (selectionChange)="onChangeCountry($event)"
+          >
+            <mat-option
+              *ngFor="let country of countryList; let i = index"
+              [value]="i"
+              >{{ country.CountryName }}</mat-option
+            >
           </mat-select>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
           <mat-label>State</mat-label>
-          <mat-select formControlName="state">
-            <mat-option [value]="list" *ngFor="let list of stateList">{{
-              list
-            }}</mat-option>
+          <mat-select
+            formControlName="state"
+            (selectionChange)="onChangeState($event)"
+          >
+            <mat-option *ngIf="stateList == undefined" value="-1" disabled
+              >--Select State--</mat-option
+            >
+            <mat-option
+              *ngFor="let list of stateList; let j = index"
+              [value]="j"
+              >{{ list.StateName }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>City</mat-label>
+          <mat-select formControlName="city">
+            <mat-option *ngIf="cityList == undefined" value="-1" disabled
+              >--Select City--</mat-option
+            >
+            <mat-option
+              *ngFor="let list of cityList; let k = index"
+              [value]="k"
+              >{{ list }}</mat-option
+            >
           </mat-select>
         </mat-form-field>
 
