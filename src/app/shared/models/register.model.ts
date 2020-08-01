@@ -6,5 +6,6 @@ export class RegisterModel {
   gender: string;
   country: string;
   state: string;
+  city: string;
   token: string;
 }

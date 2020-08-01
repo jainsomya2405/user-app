@@ -16,41 +16,13 @@ import { AuthService } from '../shared/services/auth.service';
 export class RegisterComponent implements OnInit {
   user: RegisterModel = new RegisterModel();
   registerForm: FormGroup;
-  countryList: string[] = [
-    'Argentina',
-    'Bangladesh',
-    'Belgium',
-    'Brazil',
-    'Canada',
-    'Egypt',
-    'France',
-    'Germany',
-    'Hungary',
-    'India',
-    'Japan',
-    'Nepal',
-    'Pakistan',
-    'Singapore',
-    'Switzerland',
-    'United States of America',
-  ];
-
-  stateList: string[] = [
-    'Andhra Pradesh',
-    'Bihar',
-    'Goa',
-    'Jammu and Kashmir',
-    'Madhya Pradesh',
-    'Maharashtra',
-    'Punjab',
-    'Telangana',
-    'West Bengal',
-  ];
-
+  countryList: any;
+  stateList: any
   genderList: string[] = ['Male', 'Female'];
   hidePassword = true;
-  mode;
-  buttonName='Register'
+  mode: string;
+  cityList: any;
+  buttonName = 'Register';
 
   constructor(
     private fb: FormBuilder,
@@ -64,9 +36,12 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.mode = this.route.snapshot.queryParamMap.get('mode');
+    this.userService.allCountries().subscribe((data) => {
+      this.countryList = data.Countries;
+    });
     if (this.mode == 'edit') {
       this.user = this.authService.getCurrentUser;
-      this.buttonName='Save'
+      this.buttonName = 'Save';
     }
     this.registerForm = this.fb.group({
       name: [this.user.name, [Validators.required, Validators.minLength(4)]],
@@ -83,12 +58,22 @@ export class RegisterComponent implements OnInit {
       ],
       country: [this.user.country],
       state: [this.user.state],
+      city: [this.user.city],
       gender: [this.user.gender],
     });
   }
 
   get formControls() {
     return this.registerForm.controls;
+  }
+
+  onChangeCountry(countryValue: any) {
+    this.stateList = this.countryList[countryValue.value].States;
+    this.cityList = this.stateList[0].Cities;
+  }
+
+  onChangeState(stateValue: any) {
+    this.cityList = this.stateList[stateValue.value].Cities;
   }
 
   register() {

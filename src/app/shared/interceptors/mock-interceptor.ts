@@ -59,6 +59,7 @@ export class MockInterceptor implements HttpInterceptor {
         name: user.name,
         country: user.country,
         state: user.state,
+        city: user.city,
         gender: user.gender,
         token: 'fake-jwt-token',
       });
@@ -91,6 +92,7 @@ export class MockInterceptor implements HttpInterceptor {
         name: user.name,
         country: user.country,
         state: user.state,
+        city: user.city,
         gender: user.gender,
         token: 'fake-jwt-token',
       });
