@@ -51,7 +51,11 @@ export class MockInterceptor implements HttpInterceptor {
       const user = users.find(
         (x) => x.email === email && x.password === password
       );
-      if (!user) return error('Email or password is incorrect');
+      if (users.length == 0) {
+        return error('Please register!!');
+      } else if (!user && users.length>0) {
+        return error('Email or password is incorrect');
+      }
       return ok({
         id: user.id,
         email: user.email,

@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit {
   user: RegisterModel = new RegisterModel();
   registerForm: FormGroup;
   countryList: any;
-  stateList: any
+  stateList: any;
   genderList: string[] = ['Male', 'Female'];
   hidePassword = true;
   mode: string;
@@ -38,6 +38,14 @@ export class RegisterComponent implements OnInit {
     this.mode = this.route.snapshot.queryParamMap.get('mode');
     this.userService.allCountries().subscribe((data) => {
       this.countryList = data.Countries;
+      if (this.mode == 'edit') {
+        this.stateList = this.countryList.filter(
+          (data: any) => data.CountryName == this.user.country
+        )[0].States;
+        this.cityList = this.stateList.filter(
+          (data: any) => data.StateName == this.user.state
+        )[0].Cities;
+      }
     });
     if (this.mode == 'edit') {
       this.user = this.authService.getCurrentUser;
@@ -68,12 +76,12 @@ export class RegisterComponent implements OnInit {
   }
 
   onChangeCountry(countryValue: any) {
-    this.stateList = this.countryList[countryValue.value].States;
+    this.stateList = this.getStates(countryValue.value);
     this.cityList = this.stateList[0].Cities;
   }
 
   onChangeState(stateValue: any) {
-    this.cityList = this.stateList[stateValue.value].Cities;
+    this.cityList = this.getCities(stateValue.value);
   }
 
   register() {
@@ -107,5 +115,16 @@ export class RegisterComponent implements OnInit {
           this.router.navigate(['login']);
         });
     }
+  }
+
+  getStates(countryName: string) {
+    return this.countryList.filter(
+      (data: any) => data.CountryName == countryName
+    )[0].States;
+  }
+
+  getCities(stateName: string) {
+    return this.stateList.filter((data: any) => data.StateName == stateName)[0]
+      .Cities;
   }
 }
