@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RegisterModel } from '../shared/models/register.model';
+import { IUser } from '../shared/models/register';
 import { AuthService } from '../shared/services/auth.service';
 import { UserService } from '../shared/services/user.service';
 import { Router } from '@angular/router';
@@ -10,8 +10,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-details.component.scss'],
 })
 export class UserDetailsComponent implements OnInit {
-  currentUser: RegisterModel;
+  currentUser: IUser;
   users = [];
+  userName = '';
+  mainItems = new Array();
+  selectedItems = new Array();
 
   constructor(
     private authService: AuthService,
@@ -40,5 +43,29 @@ export class UserDetailsComponent implements OnInit {
     this.router.navigate(['register'], {
       queryParams: { mode: 'edit' },
     });
+  }
+
+  submit(value) {
+    let object = {};
+    object = {
+      id: this.mainItems.length == 0 ? 1 : this.mainItems.length + 1,
+      name: value,
+      active: false,
+    };
+    this.mainItems.push(object);
+    console.log(this.mainItems);
+    this.userName = '';
+  }
+
+  changeText(id) {
+    debugger;
+    var array = this.mainItems.filter((data) => data.id == id);
+    this.selectedItems.push(array);
+    this.mainItems.forEach((data) => {
+      if (data.id == id) {
+        data.active = true;
+      }
+    });
+    console.log(this.mainItems);
   }
 }

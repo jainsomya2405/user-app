@@ -7,8 +7,24 @@
         <p>Email : {{ currentUser.email }}</p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button (click)="edit()" class="card-button">Edit Profile</button>
+        <button mat-button (click)="edit()" class="card-button">
+          Edit Profile
+        </button>
       </mat-card-actions>
     </mat-card>
   </div>
+</div>
+
+<div style="display: flex; justify-content: flex-start; align-items: center;">
+  <input [(ngModel)]="userName" />
+  <button (click)="submit(userName)">click me</button>
+
+  <ul *ngFor="let item of mainItems">
+    <li
+      (click)="changeText(item.id)"
+      [ngStyle]="{ 'text-decoration': item.active ? ' line-through' : 'none' }"
+    >
+      {{ item.name }}
+    </li>
+  </ul>
 </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RegisterModel } from './shared/models/register.model';
+import { IUser } from './shared/models/register';
 import { AuthService } from './shared/services/auth.service';
 import { Router } from '@angular/router';
 
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  currentUser: RegisterModel;
+  currentUser: IUser;
   constructor(private authService: AuthService, private router: Router) {
     this.authService.currentUser.subscribe((x) => (this.currentUser = x));
   }

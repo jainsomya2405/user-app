@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { RegisterModel } from '../models/register.model';
+import { IUser } from '../models/register';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private currentUserSubject: BehaviorSubject<RegisterModel>;
-  public currentUser: Observable<RegisterModel>;
+  private currentUserSubject: BehaviorSubject<IUser>;
+  public currentUser: Observable<IUser>;
 
   constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<RegisterModel>(
+    this.currentUserSubject = new BehaviorSubject<IUser>(
       JSON.parse(localStorage.getItem('currentUser'))
     );
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  public get getCurrentUser(): RegisterModel {
+  public get getCurrentUser(): IUser {
     return this.currentUserSubject.value;
   }
 

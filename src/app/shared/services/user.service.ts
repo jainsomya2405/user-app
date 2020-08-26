@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { RegisterModel } from '../models/register.model';
+import { IUser } from '../models/register';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
@@ -11,10 +11,10 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   getAll() {
-    return this.http.get<RegisterModel[]>(`/users`);
+    return this.http.get<IUser[]>(`/users`);
   }
 
-  register(user: RegisterModel) {
+  register(user: IUser) {
     return this.http.post(`/users/register`, user);
   }
 

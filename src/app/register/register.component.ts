@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { RegisterModel } from '../shared/models/register.model';
+import { IUser } from '../shared/models/register';
 import { CustomValidationService } from '../shared/custom-validation.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -14,7 +14,7 @@ import { AuthService } from '../shared/services/auth.service';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-  user: RegisterModel = new RegisterModel();
+  user: IUser;
   registerForm: FormGroup;
   countryList: any;
   stateList: any;
